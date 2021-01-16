@@ -33,10 +33,27 @@ export function StoreProvider({ children }) {
       .collection("patient_data");
   }
 
+  function batchPatients(patients) {
+    const batch = db.batch();
+    console.log("pat", patients);
+
+    patients.forEach(patient => {
+      const collectionRef = db
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("patient_data")
+        .doc();
+      batch.set(collectionRef, patient);
+    });
+
+    return batch.commit();
+  }
+
   const value = {
     addPatient,
     deletePatient,
     getPatients,
+    batchPatients,
   };
 
   return (

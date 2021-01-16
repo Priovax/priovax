@@ -48,7 +48,7 @@ const columns = [
 export default function DataTable() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
-  const { getPatients } = useStore();
+  const { getPatients, batchPatients } = useStore();
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
@@ -57,48 +57,21 @@ export default function DataTable() {
   useEffect(() => {
     getPatients().onSnapshot(querySnapshot => {
       const temp = querySnapshot.docs.map((doc, index) => {
-        console.log(index);
-        console.log("doc", { id: index, ...doc.data() });
-        return { id: index, ...doc.data() };
+        return { id: index + 1, ...doc.data() };
       });
       setRows(temp);
     });
   }, []);
 
-  const handleOnDrop = data => {
-    console.log("---------------------------");
-    console.log(data);
-
-    setRows(
-      data.map(record => {
-        console.log(record);
-        const { ID, ...rest } = record.data;
-        return {
-          id: ID,
-          ...rest,
-        };
-      })
-    );
-
-    // setColumns(
-    //   Object.keys(data[0].data).map(key => {
-    //     console.log(key.length);
-    //     return { field: key, headerName: key, width: key.length * 10 + 50 };
-    //   })
-    // );
-    console.log(rows);
-    console.log("---------------------------");
-  };
-
   return (
     <>
       <div style={{ height: "70vh", width: "100%" }}>
-        <DataGrid rows={rows} columns={columns} pageSize={50} />
+        <DataGrid rows={rows} columns={columns} pageSize={25} />
       </div>
 
       <div className="w-100 d-flex align-items-center mt-2">
         <PatientModal></PatientModal>
-        <CsvModal handleOnDrop={handleOnDrop}></CsvModal>
+        <CsvModal></CsvModal>
       </div>
     </>
   );
