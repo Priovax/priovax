@@ -1,0 +1,45 @@
+import numpy as np
+import pandas as pd
+import requests
+
+#Processing the data via DropBase API
+def absent_crimson_pig(df):
+    df.drop(columns="ID", inplace=True)
+    df.drop(columns="DateOfOnsetSymptoms", inplace=True)
+    df.drop(columns="respiratory", inplace=True)
+    df.drop(columns="weakness/pain", inplace=True)
+    df.drop(columns="fever", inplace=True)
+    df.drop(columns="gastrointestinal", inplace=True)
+    df.drop(columns="other", inplace=True)
+    df.drop(columns="nausea", inplace=True)
+    df.drop(columns="cardiac", inplace=True)
+    df.drop(columns="high fever", inplace=True)
+    df.drop(columns="kidney", inplace=True)
+    df.drop(columns="asymptomatic", inplace=True)
+    df.drop(columns="Latitude", inplace=True)
+    df.drop(columns="Longitiude", inplace=True)
+    return df
+
+#Processing the data via DropBase API
+def sufficient_ivory_turkey(df):
+    df = df[~df["age"].str.contains("-")]
+    return df
+
+#Processing the data via DropBase API
+def equal_copper_swan(df):
+    df.drop(columns="NA", inplace=True)
+    return df
+
+#Processing the data via DropBase API
+def vocational_yellow_albatross(df):
+    df.rename(columns={"ChronicDiseaseQ":"chronic_disease"}, inplace=True)
+    df.rename(columns={"respiratory_CD":"respiratory"}, inplace=True)
+    df.rename(columns={"cardiacs_cd":"cardiacs"}, inplace=True)
+    df.rename(columns={"kidney_CD":"kidney"}, inplace=True)
+    return df
+
+TOKEN = "8sK8dDFHerGf8LWdcFkMhT"
+
+URL = "https://api2.dropbase.io/v1/pipeline/run_pipeline"
+
+response = requests.post(URL, data = {'token': TOKEN, 'fileUrl': https://raw.githubusercontent.com/stccenter/COVID-19/master/prediction/patiant-level%20fatality/data/small%20records.csv"})
