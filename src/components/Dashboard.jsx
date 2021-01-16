@@ -1,22 +1,36 @@
 import { DataGrid } from "@material-ui/data-grid";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useStore } from "../contexts/StoreContext";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CsvModal from "./CsvModal";
+import PatientModal from "./PatientModal";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "priority", headerName: "priority", width: 130 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "id", headerName: "#", width: 70 },
+  { field: "priority", headerName: "Priority", width: 130 },
+  { field: "first_name", headerName: "First name", width: 130 },
+  { field: "last_name", headerName: "Last name", width: 130 },
   {
     field: "age",
     headerName: "Age",
     type: "number",
     width: 90,
   },
+  { field: "gender_binary", headerName: "Gender", width: 130 },
+  { field: "blood", headerName: "Blood", width: 130 },
+  { field: "cancer", headerName: "Cancer", width: 130 },
+  { field: "cardiacs", headerName: "Cardiacs", width: 130 },
+  { field: "diabetes", headerName: "Diabetes", width: 130 },
+  { field: "hypertension", headerName: "Hypertension", width: 130 },
+  { field: "kidney", headerName: "Kidney", width: 130 },
+  { field: "neuro", headerName: "Neuro", width: 130 },
+  { field: "ortho", headerName: "Ortho", width: 130 },
+  { field: "prostate", headerName: "Prostate", width: 130 },
+  { field: "respiratory", headerName: "Respiratory", width: 130 },
+  { field: "thyroid", headerName: "Thyroid", width: 130 },
 ];
 
 // const rows = [
@@ -34,10 +48,22 @@ const columns = [
 export default function DataTable() {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
+  const { getPatients } = useStore();
   const history = useHistory();
 
   const [rows, setRows] = useState([]);
-  const [columns, setColumns] = useState([]);
+  //const [columns, setColumns] = useState([]);
+
+  useEffect(() => {
+    getPatients().onSnapshot(querySnapshot => {
+      const temp = querySnapshot.docs.map((doc, index) => {
+        console.log(index);
+        console.log("doc", { id: index, ...doc.data() });
+        return { id: index, ...doc.data() };
+      });
+      setRows(temp);
+    });
+  }, []);
 
   const handleOnDrop = data => {
     console.log("---------------------------");
@@ -54,12 +80,12 @@ export default function DataTable() {
       })
     );
 
-    setColumns(
-      Object.keys(data[0].data).map(key => {
-        console.log(key.length);
-        return { field: key, headerName: key, width: key.length * 10 + 50 };
-      })
-    );
+    // setColumns(
+    //   Object.keys(data[0].data).map(key => {
+    //     console.log(key.length);
+    //     return { field: key, headerName: key, width: key.length * 10 + 50 };
+    //   })
+    // );
     console.log(rows);
     console.log("---------------------------");
   };
@@ -70,7 +96,8 @@ export default function DataTable() {
         <DataGrid rows={rows} columns={columns} pageSize={50} />
       </div>
 
-      <div className="w-100  mt-2">
+      <div className="w-100 d-flex align-items-center mt-2">
+        <PatientModal></PatientModal>
         <CsvModal handleOnDrop={handleOnDrop}></CsvModal>
       </div>
     </>

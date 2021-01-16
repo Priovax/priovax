@@ -26,19 +26,19 @@ export default function FormDialog(props) {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Upload patient data
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Upload CSV
       </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Upload Patient Data</DialogTitle>
         <CustomContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Upload your patient data via csv below. Please follow the format ID,
+            Firstname, Lastname, Age, Conditions...
           </DialogContentText>
           <CsvReader handleOnDrop={props.handleOnDrop}></CsvReader>
         </CustomContent>
