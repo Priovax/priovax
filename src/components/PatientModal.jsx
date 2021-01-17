@@ -102,6 +102,7 @@ export default function FormDialog(props) {
       conditions[v] = 1;
     });
     addPatient({
+      priority: null,
       first_name: firstName,
       last_name: lastName,
       phone_number: phoneNumber,
