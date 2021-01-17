@@ -1,4 +1,4 @@
-## About this project
+# About this project
 Based on key factors such as the person's age, gender and pre-existing health conditions, our Machine Learning model calculates the patient’s risk of fatality (decimal value between 0-1) if they were to contract Covid-19. Following this calculation, the model automatically sorts all patients according to their determined risk level. This is the order that the people will be recommended to receive their vaccines. 
 
 ## Technologies Used
@@ -9,10 +9,10 @@ Cloud: Google Cloud Platform, Firebase.
 Database: Dropbase, Firestore.  
 Communication with patients: Vonage API.  
 
-# Presentation Link
+#3 Presentation Link
 https://www.canva.com/design/DAETds0B56M/K8V9k29tVWwp_lvzpuoCOQ/view?utm_content=DAETds0B56M&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
 
-# Devpost Link
+## Devpost Link
 https://devpost.com/software/priovax
 
 # Getting Started with Create React App
