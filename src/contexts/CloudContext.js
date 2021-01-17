@@ -8,11 +8,11 @@ export function useCloud() {
 }
 
 export function CloudProvider({ children }) {
-  function notifyPatients(phone_number) {
+  function notifyPatients(phone_number, date) {
     //cloud function
     const notify = cloud.httpsCallable("notify");
 
-    return notify({ phone_number: phone_number });
+    return notify({ phone_number: phone_number, date: date });
   }
 
   const value = {

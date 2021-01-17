@@ -54,11 +54,28 @@ export default function DataTable() {
     });
   }, []);
 
+  const compare = (a, b) => {
+    if (a.prioritzation > b.prioritzation) {
+    }
+    if (a.prioritzation < b.prioritzation) {
+      return -1;
+    }
+    if (a.prioritzation > b.prioritzation) {
+      return 1;
+    }
+    // a must be equal to b
+    return 0;
+  };
+
   const handleVonage = () => {
-    rows.forEach(patient => {
+    rows.sort(compare).forEach((patient, index) => {
       console.log(patient.phone_number);
+
+      let day = new Date();
+      day.setDate(day.getDate() + index);
+
       patient.phone_number &&
-        notifyPatients(patient.phone_number)
+        notifyPatients(patient.phone_number, day)
           .then(result => {
             console.log(result);
           })

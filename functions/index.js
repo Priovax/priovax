@@ -13,13 +13,15 @@ const vonage = new Vonage({
 });
 
 const from = VONAGE_BRAND_NAME;
-const text = 'Your COVID-19 vaccine is ready!' 
-            + 'You have been scheduled for the week of May 10th 2021 - May 14th 2021 to get vaccinated.'
-            + 'If this week works for, please reply with "YES" and call us to set the time you\'d like to come.'
-            + 'Otherwise, please reply "NO" and you will be automatically rescheduled for another period.';
+const text =
+  "Your COVID-19 vaccine is ready!" +
+  "You have been scheduled for the week of May 10th 2021 - May 14th 2021 to get vaccinated." +
+  'If this week works for, please reply with "YES" and call us to set the time you\'d like to come.' +
+  'Otherwise, please reply "NO" and you will be automatically rescheduled for another period.';
 
 exports.notify = functions.https.onCall((data, context) => {
   console.log(data.phone_number);
+  console.log(data.date);
   vonage.message.sendSms(from, data.phone_number, text, (err, responseData) => {
     if (err) {
       console.log(err);
