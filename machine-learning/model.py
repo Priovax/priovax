@@ -1,16 +1,30 @@
-# Import the packages for this lab
+import numpy as np
 import pandas as pd
-# Import logistic regression models
+import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import precision_score, recall_score
 from sklearn.utils import resample
-import pickle
 
-# Load all the data required for this lab
-df = pd.read_csv('https://docs.google.com/uc?export=download&id=1SAvFVzeP5t_Tyt4nemQKg54wO0bDZE93')
+import requests
+import json
 
-df = df.drop(columns=["Unnamed: 0"])
-df = df[['age', 'blood', 'cancer', 'cardiacs', 'chronic_disease', 'death_binary', 'diabetes', 'gender_binary', 'hypertension', 'kidney', 'neuro', 'ortho', 'prostate', 'respiratory', 'thyroid']]
+### Dropbase
+
+# Setup
+Database_REST_API = 'https://query.dropbase.io/jfDnFY7mFDtjRxWbgzEUp3'
+Table_to_Query = 'covid_patient_data_for_ml'
+Access_Key = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhYmFzZUlkIjoiamZEbkZZN21GRHRqUnhXYmd6RVVwMyIsImFjY2Vzc1Blcm0iOiJmdWxsIiwidG9rZW5JZCI6Ik5qZlRIY3pJM2lnMVBFcU0yeEg1blFoVzJ6T3VreXVaSHUwcHNOM3hWWUxBaDNkT3M2M2pTME5nQkVncXRxQ1kiLCJpYXQiOjE2MTA4NjUyMDcsImV4cCI6MTYxMTAzODAwNywiaXNzIjoiZHJvcGJhc2UuaW8iLCJzdWIiOiJaWW1SYXBicHNWOEZRN1A4a0hnU2U2In0.ypMrosQXuk3zV8A-0NfjsHZZt-XRwiPbS9VwIWYhOD0'
+
+# GET request to fetch dataset
+r = requests.get(Database_REST_API + "/" + Table_to_Query, headers = {"Authorization": Access_Key})
+
+# Convert into dataframe
+df = pd.read_json(json.dumps(r.json()))
+df = df.drop("dropbase_id", 1)
+df = df.drop("dropbase_ts", 1)
+
+
+### Machine Learning
 
 #DownSample Majority Class
 df_majority = df[df.death_binary==0]
