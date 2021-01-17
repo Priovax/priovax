@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/machine-learning/priovax-fcb9ade902f9.json
+/machine-learning/requirements.json
