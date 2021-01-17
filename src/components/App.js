@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Navbar from "./Navbar";
+import Admin from "./Admin";
 
 import { styled } from "@material-ui/core/styles";
 
@@ -21,18 +22,20 @@ function App() {
       <AuthProvider>
         <StoreProvider>
           <CloudProvider>
-            <Navbar />
-            <PageWrapper>
-              <Router>
+            <Router>
+              <Navbar />
+              <PageWrapper>
                 <Switch>
                   <PrivateRoute exact path="/" component={Dashboard} />
+                  <PrivateRoute path="/admin" component={Admin} />
+
                   {/* <PrivateRoute path="/update-profile" component={UpdateProfile} /> */}
                   <Route path="/signup" component={Signup} />
                   <Route path="/login" component={Login} />
                   {/* <Route path="/forgot-password" component={ForgotPassword} /> */}
                 </Switch>
-              </Router>
-            </PageWrapper>
+              </PageWrapper>
+            </Router>
           </CloudProvider>
         </StoreProvider>
       </AuthProvider>

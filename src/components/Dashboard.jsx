@@ -8,12 +8,14 @@ import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CsvModal from "./CsvModal";
 import PatientModal from "./PatientModal";
+import axios from "axios";
 
 const columns = [
   { field: "id", headerName: "#", width: 70 },
-  { field: "priority", headerName: "Priority", width: 130 },
+  { field: "probability", headerName: "Priority", width: 130 },
   { field: "first_name", headerName: "First name", width: 130 },
   { field: "last_name", headerName: "Last name", width: 130 },
+  { field: "phone_number", headerName: "Phone number", width: 200 },
   {
     field: "age",
     headerName: "Age",
@@ -36,11 +38,9 @@ const columns = [
 
 export default function DataTable() {
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
-  const { getPatients, batchPatients } = useStore();
+  const { currentUser } = useAuth();
+  const { getPatients } = useStore();
   const { notifyPatients } = useCloud();
-
-  const history = useHistory();
 
   const [rows, setRows] = useState([]);
   //const [columns, setColumns] = useState([]);
@@ -60,11 +60,23 @@ export default function DataTable() {
       patient.phone_number &&
         notifyPatients(patient.phone_number)
           .then(result => {
-            // var sanitizedMessage = result.data.text;
-            console.log("blah");
+            console.log(result);
           })
           .catch(err => console.log(err));
     });
+  };
+
+  const handleML = () => {
+    axios
+      .post("https://us-central1-priovax.cloudfunctions.net/predictionModel", {
+        clinic_id: currentUser.uid,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -72,11 +84,30 @@ export default function DataTable() {
       <div style={{ height: "70vh", width: "100%" }}>
         <DataGrid rows={rows} columns={columns} pageSize={25} />
       </div>
-
-      <div className="w-100 d-flex align-items-center mt-2">
-        <Button onClick={handleVonage}>Notify All Patients</Button>
-        <PatientModal></PatientModal>
-        <CsvModal></CsvModal>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <div className=" d-flex align-items-center mt-2">
+          <PatientModal></PatientModal>
+          <CsvModal></CsvModal>
+        </div>
+        <div className=" d-flex align-items-center mt-2">
+          <Button
+            variant="contained"
+            color="secondary"
+            className="mr-2"
+            onClick={handleML}
+          >
+            Prioritize
+          </Button>
+          <Button variant="outlined" color="secondary" onClick={handleVonage}>
+            Notify All Patients
+          </Button>
+        </div>
       </div>
     </>
   );
