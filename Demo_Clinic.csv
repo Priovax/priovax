@@ -1,0 +1,18 @@
+first_name,last_name,phone_number,age,chronic_disease,gender_binary,death_binary,diabetes,neuro,hypertension,cancer,ortho,respiratory,cardiacs,kidney,blood,prostate,thyroid
+Nina ,Hruska,,48,1,1,1,1,1,0,0,0,0,0,0,0,0,0
+Lawrence ,Hoke,,58,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Donald,Papadopoulos,,66,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Jaime,Applegate,,66,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Donald,Sims,,66,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+John,Garvey,,73,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Corey,Bryant,,69,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+John,Bryant,,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Leonard,Costello,,36,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Kirk,Davis,,37,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+William,Belliveau,,37,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+Lynn ,Thurber,,86,1,0,1,1,0,1,1,0,0,0,0,0,0,0
+Ignacio,Millar,,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+James,Mark,,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Braden,Collingwood,12049157255,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jake,Bisson ,16136179394,27,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Malh,Shah,16478937552,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0
