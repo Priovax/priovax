@@ -83,6 +83,9 @@ export default function DataTable() {
     });
   };
 
+  axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+  axios.defaults.headers.post["Content-Type"] = "application/json";
+
   const handleML = () => {
     axios
       .post("https://us-central1-priovax.cloudfunctions.net/predictionModel", {

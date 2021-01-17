@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 export default function Admin() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { currentUser, login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -41,6 +41,9 @@ export default function Admin() {
           <Button color="secondary" className="w-100">
             Delete Patient Data
           </Button>
+          <p style={{ display: "flex", justifyContent: "center" }}>
+            {currentUser.uid}
+          </p>
         </Card.Body>
       </Card>
     </div>

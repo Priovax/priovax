@@ -159,7 +159,7 @@ export default function PrimarySearchAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Priovax
+            PrioVax
           </Typography>
 
           <div className={classes.grow} />
