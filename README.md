@@ -9,7 +9,7 @@ Cloud: Google Cloud Platform, Firebase.
 Database: Dropbase, Firestore.  
 Communication with patients: Vonage API.  
 
-#3 Presentation Link
+## Presentation Link
 https://www.canva.com/design/DAETds0B56M/K8V9k29tVWwp_lvzpuoCOQ/view?utm_content=DAETds0B56M&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
 
 ## Devpost Link
